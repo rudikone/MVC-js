@@ -27,12 +27,6 @@ public class AdminRestController {
         this.roleService = roleService;
     }
 
-    //старое рабочее
-//    @PostMapping("/users/create")
-//    public List<User> addNewUser(@RequestBody User user) {
-//        userService.save(user);
-//        return userService.getAllUsers();
-//    }
 
     @PostMapping("/users/create")
     public ResponseEntity<List<User>> addNewUser(@RequestBody User user) {
@@ -60,19 +54,6 @@ public class AdminRestController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    //старое рабочее
-//    @DeleteMapping("/users/{id}")
-//    public List<User> deleteUsers(@PathVariable Long id) {
-//        userService.delete(id);
-//        return userService.getAllUsers();
-//    }
-
-    //старое рабочее
-//    @DeleteMapping("/users/{id}")
-//    public List<User> deleteUsers(@PathVariable Long id) {
-//        userService.delete(id);
-//        return userService.getAllUsers();
-//    }
 
     @DeleteMapping("/users/{id}")
     public ResponseEntity<List<User>> deleteUsers(@PathVariable Long id) {
@@ -87,7 +68,7 @@ public class AdminRestController {
     public ResponseEntity<User> getUser(Principal principal) {
         String email = principal.getName();
         User user = userService.getUserByEmail(email);
-        return user !=null
+        return user != null
                 ? new ResponseEntity<>(user, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -95,22 +76,17 @@ public class AdminRestController {
     @GetMapping("/users/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         User user = userService.show(id);
-        return user !=null
+        return user != null
                 ? new ResponseEntity<>(user, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-//старое рабочее
-//    @GetMapping("/roles/{id}")
-//    public Role getRoleById(@PathVariable Integer id) {
-//        return roleService.findRoleById(id);
-//    }
 
     @GetMapping("/roles/{id}")
     public ResponseEntity<Role> getRoleById(@PathVariable Integer id) {
         Role role = roleService.findRoleById(id);
         System.out.println(role);
-        return role !=null
+        return role != null
                 ? new ResponseEntity<>(role, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
