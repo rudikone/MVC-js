@@ -21,11 +21,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
     @Override
     @Transactional
     public List<User> getAllUsers() {
-        Iterable<User> users = userRepository.findAll();
-        return (List<User>) users;
+        List<User> users = userRepository.findAll();
+        return users;
     }
 
     @Override

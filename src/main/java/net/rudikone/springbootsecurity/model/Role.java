@@ -1,5 +1,7 @@
 package net.rudikone.springbootsecurity.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -17,6 +19,7 @@ public class Role implements GrantedAuthority {
     @Column(name = "role")
     private String role;
 
+    @Transient
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
@@ -58,8 +61,8 @@ public class Role implements GrantedAuthority {
         return role;
     }
 
-    @Override
-    public String toString() {
-        return (String) role.substring(5);
-    }
+//    @Override
+//    public String toString() {
+//        return (String) role.substring(5);
+//    }
 }

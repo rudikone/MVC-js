@@ -1,4 +1,4 @@
-package net.rudikone.springbootsecurity.controllers;
+package net.rudikone.springbootsecurity.controllers.simplecontrollers;
 
 import net.rudikone.springbootsecurity.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,16 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/userpage")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
     @GetMapping("")
-    public String getUserPage(Model model, Principal principal) {
-        String email = principal.getName();
-        model.addAttribute("user", userService.getUserByEmail(email));
+    public String getUserPage() {
         return "/userpage";
     }
 }
