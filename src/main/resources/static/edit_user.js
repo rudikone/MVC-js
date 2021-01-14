@@ -73,17 +73,34 @@ function getModalEdit(id) {
                 var age = document.getElementById("ageEdit").value;
                 var email = document.getElementById("emailEdit").value;
                 var password = document.getElementById("passwordEdit").value;
-                var role;
+                // var role;
+                //
+                // var select = document.getElementById("roleSelectEdit"); // Выбираем  select по id
+                // var roleId = select.options[select.selectedIndex].id; // Значение value для выбранного option
+                //
+                // if (roleId == 1) {
+                //     role = [{id: 1, role: "ROLE_ADMIN", users: null, authority: "ROLE_ADMIN"}];
+                // }
+                //
+                // if (roleId == 2) {
+                //     role = [{id: 2, role: "ROLE_USER", users: null, authority: "ROLE_USER"}];
+                // }
+                var role = new Array;
 
-                var select = document.getElementById("roleSelectEdit"); // Выбираем  select по id
-                var roleId = select.options[select.selectedIndex].id; // Значение value для выбранного option
+                var len = document.getElementById("roleSelectEdit").options.length;
+                var i = 0;
 
-                if (roleId == 1) {
-                    role = [{id: 1, role: "ROLE_ADMIN", users: null, authority: "ROLE_ADMIN"}];
-                }
+                for (var n = 0; n < len; n++) {
+                    if (document.getElementById("roleSelectEdit").options[n].selected == true) {
+                        if (document.getElementById("roleSelectEdit").options[n].id == 1) {
+                            role[i] = {id: 1, role: "ROLE_ADMIN", users: null, authority: "ROLE_ADMIN"};
+                        } else if (document.getElementById("roleSelectEdit").options[n].id == 2) {
+                            role[i] = {id: 2, role: "ROLE_USER", users: null, authority: "ROLE_USER"};
+                        }
 
-                if (roleId == 2) {
-                    role = [{id: 2, role: "ROLE_USER", users: null, authority: "ROLE_USER"}];
+                        i++;
+                    }
+
                 }
 
                 let userForEdit = {
@@ -117,15 +134,12 @@ function getModalEdit(id) {
                                 var userRole = data[i].roles[0].role
                             }
 
-                            let regexp = /\w+/g; // без флага g свойство lastIndex игнорируется
-                            regexp.lastIndex = 5; // ищем с 5-й позиции (т.е с запятой и далее)
-
                             table += ('<td>' + data[i].id + '</td>')
                             table += ('<td>' + data[i].firstName + '</td>')
                             table += ('<td>' + data[i].lastName + '</td>')
                             table += ('<td>' + data[i].age + '</td>')
                             table += ('<td>' + data[i].email + '</td>')
-                            table += ('<td>' + regexp.exec(userRole) + '</td>')
+                            table += ('<td>' + userRole.replace(/ROLE_/g, '') + '</td>')
                             table += ('<td><button id="' + data[i].id + '" type="button" class="edit btn btn-primary" data-toggle="modal" data-target="#editModal" data-id="' + data[i].id + '">Edit</button></td>')
                             table += ('<td><button type="button" class="delete btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="' + data[i].id + '">Delete</button></td>')
                             table += ('</tr>')

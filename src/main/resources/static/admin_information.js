@@ -11,23 +11,17 @@ function getAdminInformation() {
                 var role = data.roles[0].role
             }
 
-            let regexp = /\w+/g; // без флага g свойство lastIndex игнорируется
-            regexp.lastIndex = 5; // ищем с 5-й позиции (т.е с запятой и далее)
-
             table += ('<tr>')
             table += ('<td>' + data.id + '</td>')
             table += ('<td>' + data.firstName + '</td>')
             table += ('<td>' + data.lastName + '</td>')
             table += ('<td>' + data.age + '</td>')
             table += ('<td>' + data.email + '</td>')
-            table += ('<td>' + regexp.exec(role) + '</td>')
+            table += ('<td>' + role.replace(/ROLE_/g, '') + '</td>')
             table += ('</tr>')
             $('#auth_user').append(table)
 
-            regexp = /\w+/g; // без флага g свойство lastIndex игнорируется
-            regexp.lastIndex = 5; // ищем с 5-й позиции (т.е с запятой и далее)
-
-            $('#userInfo').html(data.email + ' with role: ' + regexp.exec(role))
+            $('#userInfo').html(data.email + ' with role: ' + role.replace(/ROLE_/g, ''))
         })
 }
 
